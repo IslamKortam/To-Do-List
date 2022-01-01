@@ -6,8 +6,6 @@ class Task {
 }
 
 
-
-
 var dummyNotDoneItem = document.getElementById("tmplateNotDoneListItem");
 
 var tasksGenerated = 0;
@@ -31,12 +29,6 @@ diplayRetrivedItems();
 
 
 
-function generateTaskId() {
-    var id = "" + tasksGenerated;
-    console.log("+new Id genreated: " + id);
-    tasksGenerated++;
-    return id;
-}
 
 function pushToLocalStorage(data) {
     data = JSON.stringify(data);
@@ -49,11 +41,16 @@ function retrieveLocalStorageData() {
     if(localStorage.getItem(tasksLocalStorageKey)){     //If there is data on local storage
         var data = localStorage.getItem(tasksLocalStorageKey);
         tasks = JSON.parse(data);
-        console.log("Length: " + Object.keys(tasks).length);
     }
 }
 
 
+function generateTaskId() {
+    var id = "" + tasksGenerated;
+    console.log("+new Id genreated: " + id);
+    tasksGenerated++;
+    return id;
+}
 
 
 function diplayRetrivedItems() {
@@ -65,13 +62,12 @@ function diplayRetrivedItems() {
         newNode.children[1].addEventListener('input', toggleDoneState)
         newNode.children[2].addEventListener('click', deleteAction);
         newNode.id = id;
-        newNode.style.display = 'list-item';
+        newNode.style.display = 'inline-block';
         
         
 
         tasksGenerated = Math.max(tasksGenerated, parseInt(id) + 1);
-        console.log(tasksGenerated);
-        console.log(typeof tasksGenerated);
+
         
         if (done) {
             newNode.children[1].checked = true;
@@ -84,9 +80,6 @@ function diplayRetrivedItems() {
         }
     }
     console.log("Done Retrieving Data");
-   
-    console.log(tasksGenerated);
-    console.log(typeof tasksGenerated);
 }
 
 
@@ -104,12 +97,10 @@ addNewTaskButton.addEventListener('click', () => {
 
     var task = new Task(taskDescription, false);
     var id = generateTaskId();
-    console.log("New Id = " + id);
-    console.log(typeof id);
+
     tasks[id] = task;
 
     pushToLocalStorage(tasks);
-    console.log(tasks);
 
     var dummyNode = dummyNotDoneItem;
     var newNode = dummyNode.cloneNode(true);
@@ -117,14 +108,10 @@ addNewTaskButton.addEventListener('click', () => {
     newNode.children[1].addEventListener('input', toggleDoneState)
     newNode.children[2].addEventListener('click', deleteAction);
     newNode.id = id;
-    newNode.style.display = 'list-item';
+    newNode.style.display = 'inline-block';
 
     taskField.value = "";
     taskField.focus();
-
-    console.log(newNode);
-    console.log(notDoneList);
-
 
     notDoneList.appendChild(newNode);
 })
@@ -139,8 +126,9 @@ function toggleDoneState(e) {
         console.log("Changing into Done");
         var newNode = targetItem.cloneNode(true);
         targetItem.remove();
-        newNode.addEventListener('input', toggleDoneState);
+        newNode.children[1].addEventListener('input', toggleDoneState);
         newNode.children[2].addEventListener('click', deleteAction);
+        
         doneList.appendChild(newNode);
         var id = newNode.id;
         tasks[id].done = true;
@@ -150,7 +138,7 @@ function toggleDoneState(e) {
         console.log("Changing into not Done");
         var newNode = targetItem.cloneNode(true);
         targetItem.remove();
-        newNode.addEventListener('input', toggleDoneState);
+        newNode.children[1].addEventListener('input', toggleDoneState);
         newNode.children[2].addEventListener('click', deleteAction);
         notDoneList.appendChild(newNode);
         var id = newNode.id;
@@ -165,8 +153,6 @@ function deleteAction(e) {
     targetItem.remove();
     delete tasks[targetItem_ID]
     
-    console.log(targetItem_ID);
-    console.log(tasks);
     pushToLocalStorage(tasks);
 }
 
@@ -180,7 +166,7 @@ searchField.addEventListener('keyup', () =>{
             element.style.display = 'none';    
         }
         else{
-            element.style.display = 'list-item';   
+            element.style.display = 'inline-block';   
         }
     }
 })
