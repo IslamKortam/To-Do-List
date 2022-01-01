@@ -5,29 +5,69 @@ class Task {
     }
 }
 
+/** **************************************  Gloabal Variables ************************************** **/
 
 var dummyNotDoneItem = document.getElementById("tmplateNotDoneListItem");
-
-var tasksGenerated = 0;
-const tasksLocalStorageKey = "todolistProjectKey"
-
-var tasks = new Object();
-
-
 var addNewTaskButton = document.getElementById("addNewTaskButton");
 var taskField = document.getElementById("newTaskNameField");
 var searchField = document.getElementById("searchField");
 var notDoneList = document.getElementById("notDoneList");
 var doneList = document.getElementById("doneList")
 
+
+var tasksGenerated = 0;
+const tasksLocalStorageKey = "todolistProjectKey"
+var tasks = new Object();
+
+
+
+
+
+
+
+
+
+
+/** **************************************  Script ************************************** **/
+
+/** **********  Retrieving Old Tasks from the Local Storage ********** **/
 retrieveLocalStorageData();
 diplayRetrivedItems();
 
 
+/** **********  Action Listeners for inputting new Tasks ********** **/
+addNewTaskButton.addEventListener('click', addNewTaskFromInputField)
+
+taskField.addEventListener('keyup', (e) => {
+    if(e.key == 'Enter' || e.keyCode == 13){
+        addNewTaskFromInputField();
+    }
+})
+
+
+/** **********  Search Function ********** **/
+
+searchField.addEventListener('keyup', () =>{
+    var searchKey = searchField.value;
+    for (var id in tasks){
+        var element = document.getElementById(id);
+        if(tasks[id].description.indexOf(searchKey) == -1){ //Deos not contain the search key
+            element.style.display = 'none';    
+        }
+        else{
+            element.style.display = 'inline-block';   
+        }
+    }
+})
 
 
 
 
+
+
+
+
+/** **************************************  Functions ************************************** **/
 
 
 function pushToLocalStorage(data) {
@@ -84,9 +124,7 @@ function diplayRetrivedItems() {
 
 
 
-
-
-addNewTaskButton.addEventListener('click', () => {
+function addNewTaskFromInputField(){
     var taskDescription = taskField.value;
 
     if (taskDescription == "") {
@@ -114,7 +152,7 @@ addNewTaskButton.addEventListener('click', () => {
     taskField.focus();
 
     notDoneList.appendChild(newNode);
-})
+}
 
 
 
@@ -155,18 +193,3 @@ function deleteAction(e) {
     
     pushToLocalStorage(tasks);
 }
-
-
-
-searchField.addEventListener('keyup', () =>{
-    var searchKey = searchField.value;
-    for (var id in tasks){
-        var element = document.getElementById(id);
-        if(tasks[id].description.indexOf(searchKey) == -1){ //Deos not contain the search key
-            element.style.display = 'none';    
-        }
-        else{
-            element.style.display = 'inline-block';   
-        }
-    }
-})
