@@ -18,6 +18,7 @@ var tasks = new Object();
 
 var addNewTaskButton = document.getElementById("addNewTaskButton");
 var taskField = document.getElementById("newTaskNameField");
+var searchField = document.getElementById("searchField");
 var notDoneList = document.getElementById("notDoneList");
 var doneList = document.getElementById("doneList")
 
@@ -171,3 +172,15 @@ function deleteAction(e) {
 
 
 
+searchField.addEventListener('keyup', () =>{
+    var searchKey = searchField.value;
+    for (var id in tasks){
+        var element = document.getElementById(id);
+        if(tasks[id].description.indexOf(searchKey) == -1){ //Deos not contain the search key
+            element.style.display = 'none';    
+        }
+        else{
+            element.style.display = 'list-item';   
+        }
+    }
+})
