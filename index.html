@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>To do List</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="page">
+            <div id="appDiv">
+                <section id="addNewTaskSection">
+                    <input type="text" id="newTaskNameField" class="inputField" placeholder="Add New Task...">
+                    <img src="icons/add.png" alt="addSign" id="addNewTaskButton">
+                </section>
+                <section id="notDoneTasks-section" class="tasksSection">
+                    <ul id="notDoneList">
+                        <li class="listItem notDoneListItem" id="tmplateNotDoneListItem"><p>Not Done Item</p><input type="checkbox"> <img class="deleteImage" src="icons/cross.png" alt="Delete Icon"></li>
+                        
+                    </ul>
+                    <section id="doneTasks-section" class="tasksSection">
+                        <ul id="doneList" >
+                            <li class="listItem doneListItem" id="tmplateDoneListItem"><p>Done Item</p><input type="checkbox"><img class="deleteImage" src="icons/cross.png" alt="Delete Icon"></li>
+                        </ul>
+                    </section>
+                </section>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>

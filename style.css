@@ -1,0 +1,76 @@
+
+body{
+    padding: 0;
+    margin: 0;
+}
+#page{
+    background-color: lightgray;
+    width: 100%;
+    text-align: center;
+    height: 1000px;
+    padding: 2%;
+}
+
+#appDiv{
+    display: inline-block;
+    border: 1px solid black;
+    width: 50%;
+    height: 500px;
+    box-sizing: border-box;
+}
+
+#addNewTaskSection{
+    width: 100%;
+    padding: 0.5%;
+    box-sizing: border-box;
+    background-color: chartreuse;
+    height: 50px;
+
+    border: 1px solid black;
+    border-radius: 5px;
+
+}
+
+.inputField{
+    /* float: left; */
+    height: 90%;
+    box-sizing: border-box;
+    padding: 1%;
+    font-size: medium;
+    border-radius: 8px;
+    width: 70%;
+}
+
+#addNewTaskButton{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin-left: 10px;
+    top: 5px;
+    cursor: pointer;
+    /* float: right; */
+}
+
+.tasksSection{
+    text-align: left;
+    background-color: lightskyblue;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+
+p{
+    display: inline-block;
+}
+
+
+
+.deleteImage{
+    cursor: pointer;
+    width: 12px;
+    margin-left: 10px;
+}
+
+#tmplateNotDoneListItem, #tmplateDoneListItem{
+    display: none;
+}
